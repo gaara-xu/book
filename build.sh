@@ -26,7 +26,5 @@ mv /gaara/Code/staticPage/dist /gaara/Code/book/
 echo "==> 重载 Nginx 配置"
 nginx -s reload
 
-# 构建完成后将 dist 复制回原目录
-cd -
-rm -rf dist
-cp -r /gaara/Code/staticPage/dist ./
+# 构建完成后删除文件
+rm -rf /gaara/Code/staticPage/*
