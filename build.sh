@@ -5,13 +5,13 @@ set -e
 # 清理旧的构建目录
 rm -rf dist
 rm -rf node_modules
-rm -rf /gaara/Code/staticPage/dist
-rm -rf /gaara/Code/staticPage/node_modules
+rm -rf /gaara/Code/staticPage/*
 
-# 更新代码
-git pull origin book
+# 拷贝当前目录所有文件到 /gaara/Code/staticPage
+cp -r ./* /gaara/Code/staticPage/
 
-# 根据传入的参数决定是否执行 npm install
+
+# 安装依赖
 echo "==> 执行 npm install"
 docker exec node2 npm install
 
@@ -19,15 +19,14 @@ docker exec node2 npm install
 echo "==> 执行 npm run build"
 docker exec node2 npm run build
 
+
+# 迁移dist
+mv /gaara/Code/staticPage/dist /gaara/Code/book/
 # 重载 Nginx
 echo "==> 重载 Nginx 配置"
 nginx -s reload
 
-# 构建完成后将 /gaara/Code/staticPage/dist 移动到当前目录
-if [ -d /gaara/Code/staticPage/dist ]; then
-  
-  mv /gaara/Code/staticPage/dist ./
-  echo "==> 已将 /gaara/Code/staticPage/dist 移动到本地目录"
-fi
-
-echo "==> 构建完成"
+# 构建完成后将 dist 复制回原目录
+cd -
+rm -rf dist
+cp -r /gaara/Code/staticPage/dist ./
