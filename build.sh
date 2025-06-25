@@ -1,7 +1,7 @@
 #!/bin/bash
 # 自动化构建脚本，适用于 book 分支
 set -e
-
+git pull origin book
 # 清理旧的构建目录
 rm -rf dist
 rm -rf node_modules
