@@ -13,11 +13,11 @@ git pull origin book
 
 # 根据传入的参数决定是否执行 npm install
 echo "==> 执行 npm install"
-docker exec node npm install
+docker exec node2 npm install
 
 # 执行构建
 echo "==> 执行 npm run build"
-docker exec node npm run build
+docker exec node2 npm run build
 
 # 重载 Nginx
 echo "==> 重载 Nginx 配置"
