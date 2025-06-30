@@ -12,8 +12,13 @@
     </el-col>
     <el-col :span="19" style="background: #181818; min-height: 100vh; margin-left: 20.8333%;">
       <el-card shadow="never" style="background: #181818; border: none; color: #fff; min-height: 100vh;">
-        <h2 style="color: #fff;">{{ article?.Title }}</h2>
-        <div v-if="article" v-html="article.Content" style="line-height:2; font-size:1.1rem; color: #eee;"></div>
+        <h2 style="color: #fff; text-align:left;">{{ article?.Title }}</h2>
+        <div v-if="article">
+          <div v-html="article.Content" style="line-height:2; font-size:1.1rem; color: #eee; text-align:left;"></div>
+          <div style="color:#888; font-size:13px; margin-top:2rem; text-align:left;">
+            总字数：{{ getWordCount(article.Content) }} 字
+          </div>
+        </div>
         <div v-else style="color: #888;">加载中...</div>
       </el-card>
     </el-col>
@@ -43,6 +48,11 @@ const fetchArticle = async (id) => {
 };
 const onSelectChapter = (id) => {
   router.push({ name: 'Chapter', params: { id } });
+};
+const getWordCount = (html) => {
+  if (!html) return 0;
+  // 去除 HTML 标签和空白字符
+  return html.replace(/<[^>]+>/g, '').replace(/\s/g, '').length;
 };
 
 onMounted(() => {

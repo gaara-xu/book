@@ -1,8 +1,8 @@
 <template>
   <el-row :gutter="0" style="height: 100vh;">
-    <el-col :span="5" style="background: #20232a; min-height: 100vh; border-right: 1px solid #222; position: fixed; left: 0; top: 0; height: 100vh; z-index: 10;">
-      <el-card shadow="never" style="background: rgba(32,35,42,0.7); border: none; color: #fff; min-height: 100vh;">
-        <h2 style="color: #fff; font-size: 1.2rem; margin-bottom: 1.5rem; cursor:pointer;" @click="goHome">章节目录</h2>
+    <el-col :span="5" style="background: #20232a; min-height: 100vh; border-right: 1px solid #222;">
+      <el-card shadow="never" style="background: #20232a; border: none; color: #fff; min-height: 100vh;">
+        <h2 style="color: #fff; font-size: 1.2rem; margin-bottom: 1.5rem;">章节目录</h2>
         <el-menu :default-active="chapterId" @select="onSelectChapter" style="background: transparent; border: none; color: #fff;">
           <el-menu-item v-for="chapter in chapters" :key="chapter._id" :index="chapter._id" style="background: transparent; color: #fff;">
             {{ chapter.Title }}
@@ -10,7 +10,7 @@
         </el-menu>
       </el-card>
     </el-col>
-    <el-col :span="19" style="background: #181818; min-height: 100vh; margin-left: 20.8333%;">
+    <el-col :span="19" style="background: #181818; min-height: 100vh;">
       <el-card shadow="never" style="background: #181818; border: none; color: #fff; min-height: 100vh;">
         <h2 style="color: #fff;">文章列表</h2>
         <div v-if="articles.length">
